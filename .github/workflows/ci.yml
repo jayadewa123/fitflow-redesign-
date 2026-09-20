@@ -1,0 +1,33 @@
+name: FitFlow CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  project-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check project structure
+        run: |
+          echo "Checking FitFlow project structure..."
+          test -d frontend
+          test -d backend
+          test -d ai-service
+          test -d docs
+          test -f README.md
+          test -f .gitignore
+          test -f docs/architecture.md
+          test -f docs/decision-matrix.md
+          test -f docs/technology-comparison.md
+          test -f docs/adr-001-technology-selection.md
+          test -f docs/architecture-diagram.png
+          echo "FitFlow project structure check passed."
